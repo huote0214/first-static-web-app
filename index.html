@@ -13,6 +13,7 @@
     <main>
     <h1>Vanilla JavaScript App</h1>
     <p>Loading content from the API: <b id="name">...</b></p>
+    <p>Loading content from the ES API: <b id="search">...</b></p>
     </main>
 
     <script type="text/javascript">
@@ -23,6 +24,20 @@
         dataType: "json",
         success: function (json) {
             $('#name').html(json.data.name);
+        },
+        error: function () {
+            alert('fail');
+        }
+    });
+
+    $.ajax({
+        url: 'http://estest.workatall.com/index.php?keyword=baidu',
+        type: "get",
+        async: false,
+        dataType: "jsonp",
+        jsonp: "callback",
+        success: function (json) {
+            $('#search').html(json.count);
         },
         error: function () {
             alert('fail');
